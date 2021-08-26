@@ -14,7 +14,10 @@ import os
 
 from django.core.urlresolvers import reverse_lazy
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+# BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 
 SECRET_KEY = '*****************************'
 
@@ -102,10 +105,15 @@ TEMPLATES = [
 
 #####################################################################
 # Database configuration
+# Database configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'orb.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # you can use your preferred one though
+        'NAME': 'orb',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1', #leave empty for default
+        'PORT': '', #leave empty for default
     }
 }
 #####################################################################
@@ -129,12 +137,21 @@ LANGUAGES = [
 ]
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 #####################################################################
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATICFILES_DIRS = [os.path.join(ROOT_DIR, 'static')]
 
+
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 #####################################################################
 # Static assets & media uploads
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'orb/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
