@@ -1,0 +1,44 @@
+/**
+ * @fileOverview CSS for jquery-autocomplete, the jQuery Autocompleter
+ * @author <a href="mailto:dylan@dyve.net">Dylan Verheul</a>
+ * @license MIT | GPL | Apache 2.0, see LICENSE.txt
+ * @see https://github.com/dyve/jquery-autocomplete
+ */
+.acResults {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+    border-radius: 4px;
+	background-color: #d9edf7;
+	overflow: hidden;
+}
+
+.acResults ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-position: outside;
+	list-style: none;
+}
+
+.acResults ul li {
+	margin: 0px;
+	padding: 3px 5px;
+	cursor: pointer;
+	display: block;
+	font: menu;
+	font-size: 14px;
+	overflow: hidden;
+}
+
+.acLoading {
+	background : url('indicator.gif') right center no-repeat;
+}
+
+.acSelect {
+<<<<<<< HEAD
+	background-color: Highlight;
+	color: HighlightText;
+=======
+	background-color: #fff;
+	color: #31708f;
+>>>>>>> feecd2c4fd956a23dc6bee049ac0dfc258761b84
+}

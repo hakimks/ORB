@@ -1,0 +1,498 @@
+/*
+ * Base structure
+
+ #2596b4 - light blue - r37 g150 b180
+ #2a6083 - mid blue - r42 g96 b131
+ #033f62 - dark blue - r3 g63 b98
+ #ff0054 - pink/red - r255 g0 b84
+ #EF485B
+
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    padding-top: 72px;
+    margin-bottom: 200px;
+}
+
+.navbar-fixed-top {
+    min-height: 72px;
+}
+
+.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    padding-top: 10px;
+}
+
+h3.homepage {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+a, span.bookmark {
+    color: #033f62;
+    text-decoration: none;
+}
+
+a:hover, a:focus, span.bookmark:hover, span.bookmark:focus {
+    color: #EF485B;
+    text-decoration: underline;
+}
+
+a.active-link {
+    cursor: pointer;
+}
+a.disabled-link {
+    cursor: help;
+    color: #999;
+}
+
+span.bookmark:hover, span.bookmark:focus {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.navbar-inverse {
+    background-color: #033f62;
+    border-color: #EF485B;
+    border-bottom: 2px solid #EF485B;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-header > a > img {
+    margin-right: 5px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    border: 1px solid #033f62;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    background-color: #033f62;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #555;
+}
+
+.navbar-inverse .control-label {
+    color: #fff;
+    font-weight: normal;
+}
+
+.navbar-inverse .form-horizontal {
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #033f62;
+    border: 1px dotted #fff;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #495525;
+}
+
+.nav-sidebar > .text {
+    color: #495525;
+    padding: 10px 20px;
+}
+
+.nav-sidebar > .active > a {
+    color: #fff;
+    background-color: #2a6083;
+}
+
+.nav > li > a:hover {
+    background-color: #2a6083;
+    color: #fff;
+}
+
+.nav > li > a:focus {
+    background-color: #2a6083;
+    color: #fff;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .main {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.main .page-header {
+    margin-top: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.placeholders h4 {
+    margin-bottom: 0;
+}
+
+.placeholder {
+    margin-bottom: 20px;
+}
+
+.placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+/*
+ * Share buttons
+ */
+
+.share-button {
+    margin-top: 20px;
+    float: left;
+    width: 100px;
+}
+
+/*
+ * Forms
+ */
+
+@media (min-width: 768px) {
+    form.form-horizontal {
+        margin: 30px 0 75px 0;
+    }
+}
+
+.form-control:focus {
+    border-color: #2596b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(37, 150, 180, 0.6);
+    outline: 0 none;
+}
+
+.btn-primary {
+    background-color: #2a6083;
+    border-color: #033f62;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+.btn-primary.active, .open .dropdown-toggle.btn-primary {
+    background-color: #033f62;
+    border-color: #033f62;
+    color: #FFFFFF;
+}
+
+.btn a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn a:hover, .btn a:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+/*
+ * Footer
+ */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #EF485B;
+    margin-top: 50px;
+    padding: 20px 0;
+    text-align: right;
+    padding-right: 20px;
+    height: 200px;
+    width: 100%;
+}
+
+tr.hover:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+div.date-picker-row-fluid {
+    float: left;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.page_navigator, .orderby {
+    padding: 10px 0;
+}
+
+div.category {
+    padding-bottom: 10px;
+}
+
+div.resourcetag {
+    display: inline-block;
+    width: 120px;
+    min-height: 100px;
+    text-align: center;
+    margin: auto;
+    vertical-align: top;
+}
+
+.file-row {
+    padding-bottom: 10px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+img.resource-row-icon {
+    opacity: .6;
+    margin-bottom: 10px;
+}
+
+img.resource-row-icon:hover {
+    opacity: 1;
+}
+
+.advanced-search-link {
+    text-align: right;
+    margin-top: -10px;
+}
+
+.resource-row-study-time {
+    display: inline-block;
+    background-color: #033f62;
+    opacity: .6;
+    color: #fff;
+    padding: 0 8px 0 0;
+    vertical-align: bottom;
+    margin-bottom: 10px;
+}
+
+.resource-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 250px
+}
+
+.resource-image-default {
+    opacity: .5;
+}
+
+.resource-row-thumbnail {
+    display: block;
+    margin: 0 auto;
+}
+
+.resource-row-thumbnail-default {
+    opacity: .5;
+}
+
+.resource-row-study-time:hover {
+    opacity: 1;
+}
+
+a.named-anchor {
+    display: block;
+    position: relative;
+    top: -80px;
+    visibility: hidden;
+}
+
+a.prominent {
+    text-decoration: underline;
+}
+
+.rating-star:hover {
+    cursor: pointer;
+}
+
+div.profile {
+    margin-bottom: 10px;
+
+}
+
+#tag-description {
+    float: left;
+}
+
+/*
+ * for country key facts
+ */
+#country-key-facts {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    float: right;
+}
+
+#country-key-facts h4 {
+    padding-top: 0;
+    margin-top: 0;
+    text-align: center;
+
+}
+
+/*
+ * Tags
+ */
+.tags-empty {
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.tags-empty p {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1.5rem 0;
+}
+
+/*
+ * Language setting
+ */
+@media (min-width: 992px) {
+    .lang-choice {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        z-index: 1;
+    }
+}
+
+
+.navbar-language {
+    float: right;
+    margin-right: 20px;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* select#i18n { width: 50px; } */
+
+
+select#i18n {
+   /* margin: 50px; */
+    border: 1px solid #111;
+    color: white;
+   background: transparent;
+   width: 100px;
+   padding: 5px 5px 5px 5px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   height: 34px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+
+select#i18n:hover {
+    border: 1px solid #EF485B;
+}
+
+/*target Internet Explorer 9 and Internet Explorer 10:*/
+@media screen and (min-width:0\0) {
+    select#i18n {
+        background:none;
+        padding: 5px;
+    }
+}
+
+
+
+div.tagsinput {
+    border-radius: 4px;
+}
+
+div.toolkit-entry {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    width: 100%;
+    clear: both;
+    margin-bottom: 40px;
+}
+
+div.toolkit-entry img {
+    float: left; max-width:150px; margin: 0 20px 30px 0;
+    padding-bottom: 10px;
+}
+
+div.tagsinput {
+    border-radius: 4px;
+}
