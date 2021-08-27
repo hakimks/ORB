@@ -8,7 +8,7 @@ import polib
 from django.apps import apps
 
 
-class OrderedDefaultDict(OrderedDict, defaultdict):
+class OrderedDefaultDict(OrderedDict):
     """
     A default dict that maintains the order of insertions
     """

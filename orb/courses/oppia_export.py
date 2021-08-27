@@ -5,7 +5,8 @@ Oppia backup-format export for courses
 from __future__ import unicode_literals
 
 import zipfile
-from StringIO import StringIO
+# from StringIO import StringIO
+from io import StringIO
 
 from django.template.loader import render_to_string
 from lxml import etree
