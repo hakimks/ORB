@@ -12,12 +12,12 @@ from orb.models import Tag, TagOwner
 def get_menu(request):
     topics = Tag.tags.public().top_level()
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         tags = TagOwner.objects.filter(user=request.user)
     else:
         tags = None
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         try:
             if request.user.userprofile and request.user.userprofile.is_reviewer:
                 reviewer = True
