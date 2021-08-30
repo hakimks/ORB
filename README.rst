@@ -2,6 +2,9 @@
 ORB Content Platform
 ====================
 
+###### Warning #####
+This repo is being upgrated to use Python 3 and Django 2. Alof of things are still not working.
+
 For documentation visit: http://mpowering.readthedocs.org
 
 For information on mPowering visit: http://mpoweringhealth.org
