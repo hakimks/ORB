@@ -10,7 +10,8 @@ from django.db.models import Q
 from django.forms.models import model_to_dict
 from django.views.generic import FormView
 
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.shortcuts import redirect

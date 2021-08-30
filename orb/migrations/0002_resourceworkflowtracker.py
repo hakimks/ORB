@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(max_length=50, choices=[(b'rejected', 'Rejected'), (b'pending_mep', 'Pending MEP'), (b'approved', 'Approved')])),
                 ('notes', models.TextField(null=True, blank=True)),
                 ('owner_email_sent', models.BooleanField(default=False)),
-                ('create_user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('resource', models.ForeignKey(to='orb.Resource')),
+                ('create_user', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('resource', models.ForeignKey(to='orb.Resource', on_delete=models.CASCADE)),
             ],
             options={
             },

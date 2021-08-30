@@ -13,7 +13,8 @@ from autoslugged.settings import slugify
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext
@@ -175,8 +176,8 @@ class Course(TimestampBase):
         choices=CourseStatus.as_choices(),
         default=CourseStatus.draft.name,
     )
-    create_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='course_create_user')
-    update_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='course_update_user')
+    create_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='course_create_user', on_delete=models.CASCADE)
+    update_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='course_update_user', on_delete=models.CASCADE)
 
     title = models.CharField(max_length=200)
 
@@ -382,11 +383,11 @@ class OppiaLog(TimestampBase):
 
     course = models.ForeignKey(
         'Course',
-        related_name="oppia_logs",
+        related_name="oppia_logs", on_delete=models.CASCADE
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name="oppia_logs",
+        related_name="oppia_logs", on_delete=models.CASCADE
     )
     oppia_host = models.URLField()
     status = models.SmallIntegerField(help_text="HTTP status code of the response")

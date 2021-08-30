@@ -22,8 +22,8 @@ class Migration(migrations.Migration):
                 ('ip', models.IPAddressField(default=None, null=True, blank=True)),
                 ('user_agent', models.TextField(default=None, null=True, blank=True)),
                 ('extra_data', models.TextField(default=None, null=True, blank=True)),
-                ('tag', models.ForeignKey(default=None, blank=True, to='orb.Tag', null=True)),
-                ('user', models.ForeignKey(default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('tag', models.ForeignKey(default=None, blank=True, to='orb.Tag', null=True, on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
             },

@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='resource',
             name='source_peer',
-            field=models.ForeignKey(related_name='resources', blank=True, to='peers.Peer', help_text='The peer ORB from which the resource was downloaded.', null=True),
+            field=models.ForeignKey(related_name='resources', blank=True, to='peers.Peer', help_text='The peer ORB from which the resource was downloaded.', null=True, on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='resource',

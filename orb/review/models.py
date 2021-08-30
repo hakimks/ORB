@@ -20,7 +20,8 @@ side effects of changing the status.
 from datetime import date, timedelta
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.dispatch import receiver
 from django.utils.timezone import now
@@ -41,7 +42,7 @@ class ReviewLogEntry(TimestampBase):
     to a resource's content review.
 
     """
-    review = models.ForeignKey('ContentReview', related_name="log_entries")
+    review = models.ForeignKey('ContentReview', related_name="log_entries", on_delete=models.CASCADE)
     review_status = models.CharField(editable=False, max_length=20)
     action = models.CharField(max_length=200)
 
@@ -94,12 +95,12 @@ class ContentReview(TimestampBase):
     Model class used to assign a content review for a resource to
     a content reviewer and to capture the review result.
     """
-    resource = models.ForeignKey('orb.Resource', related_name="content_reviews")
+    resource = models.ForeignKey('orb.Resource', related_name="content_reviews", on_delete=models.CASCADE)
     status = FSMField(default=Resource.PENDING)
-    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL)
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     notes = models.TextField(blank=True)
     criteria = models.ManyToManyField('orb.ResourceCriteria', blank=True)
-    role = models.ForeignKey(ReviewerRole, related_name="reviews")
+    role = models.ForeignKey(ReviewerRole, related_name="reviews", on_delete=models.CASCADE)
 
     reviews = ReviewQueryset.as_manager()
     objects = reviews

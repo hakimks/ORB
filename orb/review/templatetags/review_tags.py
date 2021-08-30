@@ -67,7 +67,7 @@ def selected_criteria(review):
     }
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def can_start_review(context, resource):
     """
     Returns a boolean value for whether the user in the context

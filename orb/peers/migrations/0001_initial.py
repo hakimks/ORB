@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
                 ('finished', models.DateTimeField(null=True, editable=False, blank=True)),
-                ('peer', models.ForeignKey(related_name='logs', to='peers.Peer')),
+                ('peer', models.ForeignKey(related_name='logs', to='peers.Peer', on_delete=models.CASCADE)),
             ],
             options={
             },

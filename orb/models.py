@@ -10,8 +10,9 @@ import uuid
 import parsedatetime as pdt
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core import urlresolvers
-from django.core.urlresolvers import reverse
+# from django.core import urlresolvers
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Avg, Count
@@ -105,7 +106,7 @@ class Resource(TimestampBase):
     source_host = models.URLField(null=True, blank=True,
                                    help_text=_(u"Host URL of the original ORB instance where resource was sourced."))
     source_peer = models.ForeignKey('peers.Peer', null=True, blank=True, related_name="resources",
-                                    help_text=_(u"The peer ORB from which the resource was downloaded."))
+                                    help_text=_(u"The peer ORB from which the resource was downloaded."), on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', through='ResourceTag', blank=True)
 
     resources = ResourceQueryset.as_manager()
@@ -138,7 +139,7 @@ class Resource(TimestampBase):
         return self
 
     def get_absolute_url(self):
-        return urlresolvers.reverse('orb_resource', args=[self.slug])
+        return reverse('orb_resource', args=[self.slug])
 
     def update_from_api(self, api_data):
         """
@@ -362,9 +363,9 @@ class Resource(TimestampBase):
 
 class ResourceWorkflowTracker(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
-    resource = models.ForeignKey(Resource, blank=True, null=True,
+    resource = models.ForeignKey(Resource, blank=True, null=True, on_delete=models.CASCADE,
                                  related_name="workflow_trackers")
-    create_user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    create_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=50, choices=Resource.STATUS_TYPES, default=Resource.PENDING)
     notes = models.TextField(blank=True, null=True)
@@ -378,7 +379,7 @@ class ResourceWorkflowTracker(models.Model):
 class ResourceURL(TimestampBase):
     guid = models.UUIDField(null=True, default=uuid.uuid4, unique=True, editable=False)
     url = models.URLField(blank=False, null=False, max_length=500)
-    resource = models.ForeignKey(Resource)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     title = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     order_by = models.IntegerField(default=0)
@@ -448,7 +449,7 @@ class ResourceURL(TimestampBase):
 class ResourceFile(TimestampBase):
     guid = models.UUIDField(null=True, default=uuid.uuid4, unique=True, editable=False)
     file = models.FileField(upload_to='resource/%Y/%m/%d', max_length=200)
-    resource = models.ForeignKey(Resource)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     title = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     order_by = models.IntegerField(default=0)
@@ -570,9 +571,9 @@ class ResourceRelationship(TimestampBase):
         ('is_contained_in', _('is contained in')),
     )
 
-    resource = models.ForeignKey(Resource, related_name='resource')
+    resource = models.ForeignKey(Resource, related_name='resource', on_delete=models.CASCADE)
     resource_related = models.ForeignKey(
-        Resource, related_name='resource_related')
+        Resource, related_name='resource_related', on_delete=models.CASCADE)
     relationship_type = models.CharField(
         max_length=50, choices=RELATIONSHIP_TYPES)
     description = models.TextField(blank=False, null=False)
@@ -601,7 +602,7 @@ class ResourceCriteria(models.Model):
     role = models.ForeignKey(
         'orb.ReviewerRole',
         related_name="criteria",
-        blank=True, null=True,
+        blank=True, null=True, on_delete=models.SET_NULL,
         help_text=_(u"Used to show specific criteria to reviewers based on their role. "
                     u"Leave blank if criterion applies generally."),
     )
@@ -644,8 +645,8 @@ class Category(models.Model):
 
 
 class Tag(TimestampBase):
-    category = models.ForeignKey(Category)
-    parent_tag = models.ForeignKey('self', blank=True, null=True, default=None, related_name="children")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    parent_tag = models.ForeignKey('self', blank=True, null=True, default=None, related_name="children", on_delete=models.SET_NULL)
     name = models.CharField(max_length=100)
     create_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tag_create_user', blank=True, null=True, default=None, on_delete=models.SET_NULL)
     update_user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='tag_update_user', blank=True, null=True, default=None, on_delete=models.SET_NULL)
@@ -673,7 +674,7 @@ class Tag(TimestampBase):
         return self.name
 
     def get_absolute_url(self):
-        return urlresolvers.reverse('orb_tags', args=[self.slug])
+        return reverse('orb_tags', args=[self.slug])
 
     def save(self, *args, **kwargs):
 
@@ -738,7 +739,7 @@ class Tag(TimestampBase):
 
 
 class TagProperty(models.Model):
-    tag = models.ForeignKey(Tag, related_name="properties")
+    tag = models.ForeignKey(Tag, related_name="properties", on_delete=models.CASCADE)
     name = models.TextField(blank=False, null=False)
     value = models.TextField(blank=False, null=False)
 
@@ -752,8 +753,8 @@ class TagProperty(models.Model):
 
 
 class TagOwner(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    tag = models.ForeignKey(Tag, related_name="owner")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, related_name="owner", on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ("user", "tag")
@@ -761,8 +762,8 @@ class TagOwner(models.Model):
 
 class ResourceTag(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
-    resource = models.ForeignKey(Resource)
-    tag = models.ForeignKey(Tag, related_name="resourcetag")
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, related_name="resourcetag", on_delete=models.CASCADE)
     create_user = models.ForeignKey(User, related_name='resourcetag_create_user', blank=True, null=True, default=None, on_delete=models.SET_NULL)
 
     objects = ResourceTagManager()
@@ -829,12 +830,12 @@ class UserProfile(TimestampBase):
         ('none', _(u'Prefer not to say')),
     ]
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='userprofile/%Y/%m/%d', max_length=200, blank=True, null=True)
     about = models.TextField(blank=True, null=True, default=None)
     job_title = models.TextField(blank=True, null=True, default=None)
-    organisation = models.ForeignKey(Tag, related_name='organisation', blank=True, null=True, default=None)
-    role = models.ForeignKey(Tag, related_name='role', blank=True, null=True, default=None)
+    organisation = models.ForeignKey(Tag, related_name='organisation', blank=True, null=True, default=None, on_delete=models.SET_NULL)
+    role = models.ForeignKey(Tag, related_name='role', blank=True, null=True, default=None, on_delete=models.SET_NULL)
     role_other = models.TextField(blank=True, null=True, default=None)
     phone_number = models.TextField(blank=True, null=True, default=None)
     website = models.CharField(blank=True, null=True, max_length=100, default=None)
@@ -944,8 +945,8 @@ class TagTracker(models.Model):
 
 
 class ResourceRating(TimestampBase):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False)
-    resource = models.ForeignKey(Resource, blank=False, null=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE)
+    resource = models.ForeignKey(Resource, blank=False, null=False, on_delete=models.CASCADE)
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)])
     comments = models.TextField(blank=True, null=True, default=None)
@@ -982,15 +983,15 @@ class Collection(TimestampBase):
         return self.title
 
     def get_absolute_url(self):
-        return urlresolvers.reverse('orb_collection', args=[self.slug])
+        return reverse('orb_collection', args=[self.slug])
 
     def image_filename(self):
         return os.path.basename(self.image.name)
 
 
 class CollectionUser(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False)
-    collection = models.ForeignKey(Collection, blank=False, null=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, blank=False, null=False, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Collection user')
@@ -999,8 +1000,8 @@ class CollectionUser(models.Model):
 
 
 class CollectionResource(models.Model):
-    resource = models.ForeignKey(Resource, blank=False, null=False)
-    collection = models.ForeignKey(Collection, blank=False, null=False)
+    resource = models.ForeignKey(Resource, blank=False, null=False, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, blank=False, null=False, on_delete=models.CASCADE)
     order_by = models.IntegerField(blank=False, null=False, default=0)
 
     class Meta:

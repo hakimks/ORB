@@ -1,7 +1,8 @@
 # orb/bookmark/views.py
 
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt

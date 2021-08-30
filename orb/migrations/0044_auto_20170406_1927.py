@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tag',
             name='parent_tag',
-            field=models.ForeignKey(related_name='children', default=None, blank=True, to='orb.Tag', null=True),
+            field=models.ForeignKey(related_name='children', default=None, blank=True, to='orb.Tag', null=True, on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='userprofile',

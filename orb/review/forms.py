@@ -9,7 +9,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit, HTML, Row
 from django import forms
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _

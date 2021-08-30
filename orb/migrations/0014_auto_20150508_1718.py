@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='resourceworkflowtracker',
             name='resource',
-            field=models.ForeignKey(blank=True, to='orb.Resource', null=True),
+            field=models.ForeignKey(blank=True, to='orb.Resource', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(

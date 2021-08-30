@@ -20,17 +20,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='resourcetag',
             name='tag',
-            field=models.ForeignKey(related_name='resourcetag', to='orb.Tag'),
+            field=models.ForeignKey(related_name='resourcetag', to='orb.Tag', on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='tagowner',
             name='tag',
-            field=models.ForeignKey(related_name='owner', to='orb.Tag'),
+            field=models.ForeignKey(related_name='owner', to='orb.Tag', on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='tagproperty',
             name='tag',
-            field=models.ForeignKey(related_name='properties', to='orb.Tag'),
+            field=models.ForeignKey(related_name='properties', to='orb.Tag', on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='tagtracker',

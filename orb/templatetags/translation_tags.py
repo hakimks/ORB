@@ -6,7 +6,7 @@ from modeltranslation.utils import build_localized_fieldname
 register = template.Library()
 
 
-@register.assignment_tag
+@register.simple_tag
 def translated_fields(obj, field_name):
     """
     Gets all of the translated values for a given field on an object

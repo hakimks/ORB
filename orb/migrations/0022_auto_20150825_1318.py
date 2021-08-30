@@ -37,8 +37,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('order_by', models.IntegerField(default=0)),
-                ('collection', models.ForeignKey(to='orb.Collection')),
-                ('resource', models.ForeignKey(to='orb.Resource')),
+                ('collection', models.ForeignKey(to='orb.Collection', on_delete=models.CASCADE)),
+                ('resource', models.ForeignKey(to='orb.Resource', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('collection', 'order_by', 'resource'),
@@ -51,8 +51,8 @@ class Migration(migrations.Migration):
             name='CollectionUser',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('collection', models.ForeignKey(to='orb.Collection')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('collection', models.ForeignKey(to='orb.Collection', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('collection', 'user'),

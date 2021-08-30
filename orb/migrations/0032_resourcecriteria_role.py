@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='resourcecriteria',
             name='role',
-            field=models.ForeignKey(related_name='criteria', blank=True, to='orb.ReviewerRole', help_text='Used to show specific criteria to reviewers based on their role. Leave blank if criterion applies generally.', null=True),
+            field=models.ForeignKey(related_name='criteria', blank=True, to='orb.ReviewerRole', help_text='Used to show specific criteria to reviewers based on their role. Leave blank if criterion applies generally.', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

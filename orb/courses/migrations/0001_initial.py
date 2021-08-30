@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(default='active', max_length=50, choices=[('active', 'active'), ('archived', 'archived')])),
                 ('title', models.CharField(max_length=200)),
                 ('sections', models.TextField(default='[]')),
-                ('create_user', models.ForeignKey(related_name='course_create_user', to=settings.AUTH_USER_MODEL)),
-                ('update_user', models.ForeignKey(related_name='course_update_user', to=settings.AUTH_USER_MODEL)),
+                ('create_user', models.ForeignKey(related_name='course_create_user', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('update_user', models.ForeignKey(related_name='course_update_user', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

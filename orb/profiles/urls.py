@@ -2,7 +2,8 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 
 from orb.profiles import views
-from django.contrib.auth.views import logout
+# from django.contrib.auth.views import logout
+from django.contrib.auth import logout
 from django.views.i18n import set_language
 
 urlpatterns = [

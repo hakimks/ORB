@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 import os
 
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -63,7 +63,7 @@ INSTALLED_APPS = [
 ]
 
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',

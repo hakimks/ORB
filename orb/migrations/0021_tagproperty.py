@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.TextField()),
                 ('value', models.TextField()),
-                ('tag', models.ForeignKey(to='orb.Tag')),
+                ('tag', models.ForeignKey(to='orb.Tag', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('name', 'value'),

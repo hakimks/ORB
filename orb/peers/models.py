@@ -134,7 +134,7 @@ class PeerQueryLog(models.Model):
 
     created = models.DateTimeField(editable=False, default=now)
     finished = models.DateTimeField(null=True, blank=True, editable=False)
-    peer = models.ForeignKey('Peer', related_name='logs')
+    peer = models.ForeignKey('Peer', related_name='logs', on_delete=models.CASCADE)
     filtered_date = models.DateTimeField(blank=True, null=True)
     new_resources = models.PositiveIntegerField(null=True)
     skipped_local_resources = models.PositiveIntegerField(null=True)
