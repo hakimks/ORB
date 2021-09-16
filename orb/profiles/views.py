@@ -28,7 +28,7 @@ def login_view(request):
     username = password = ''
 
     # if already logged in
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('orb_home'))
 
     if request.POST:
