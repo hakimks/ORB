@@ -201,8 +201,9 @@ def view_profile(request, id):
         raise Http404()
 
     gravatar_url = "https://www.gravatar.com/avatar.php?"
-    gravatar_url += urllib.urlencode({
-        'gravatar_id': hashlib.md5(user.email).hexdigest(),
+    gravatar_url += urllib.parse.urlencode({
+        # 'gravatar_id': hashlib.md5(user.email).hexdigest(),
+        'gravatar_id': hashlib.md5(str(user.email).encode('utf-8')).hexdigest(),
         'size': 64
     })
 
