@@ -110,8 +110,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # you can use your preferred one though
         'NAME': 'orb',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'orb',
+        'PASSWORD': 'orbpassword',
         'HOST': '127.0.0.1', #leave empty for default
         'PORT': '', #leave empty for default
     }

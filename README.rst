@@ -35,6 +35,8 @@ The settings included are designed to be as simple and sensible for baseline
 development as possible. It is *highly* recommended that the local settings
 file be used to specify database settings.
 
+utf8_general_ci - database collation
+
 Docker containers
 -----------------
 
